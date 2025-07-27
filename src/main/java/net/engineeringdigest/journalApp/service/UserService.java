@@ -6,6 +6,8 @@ import net.engineeringdigest.journalApp.entity.User;
 import net.engineeringdigest.journalApp.repository.JournalEntryRepository;
 import net.engineeringdigest.journalApp.repository.UserRepository;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +25,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    //private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     public boolean saveNewUser(User user){
         try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -31,6 +36,11 @@ public class UserService {
             userRepository.save(user);
             return true;
         } catch (Exception e) {
+            log.error("hahahahahahahaha");
+            log.warn("hahahahahahahaha");
+            log.info("hahahahahahahaha");
+            log.debug("hahahahahahahaha");
+            log.trace("hahahahahahahaha");
             return false;
         }
     }
