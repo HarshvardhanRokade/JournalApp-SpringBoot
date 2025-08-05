@@ -1,7 +1,10 @@
 package net.engineeringdigest.journalApp.service;
 
 import net.engineeringdigest.journalApp.api.response.WeatherResponse;
+import net.engineeringdigest.journalApp.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -19,6 +22,12 @@ public class WheatherService {
 
     public WeatherResponse getWeather (String city){
         String finalAPI = API.replace("CITY", city).replace("API_KEY", apiKey);
+
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.set("key","value");
+//        User user = User.builder().username("Vipul").password("Vipul").build();
+//        HttpEntity<User> httpEntity = new HttpEntity<>(user,httpHeaders);
+
         ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
         WeatherResponse body = response.getBody();
         System.out.println(finalAPI);
